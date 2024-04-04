@@ -1,0 +1,59 @@
+﻿@model proiect.Models.Product
+
+<h2 class="text-center mt-5">Adaugare produs</h2>
+
+<div class="container mt-5">
+
+    <div class="row">
+
+        <div class="col-6 offset-3">
+            <div class="card-body">
+            @using (Html.BeginForm(actionName: "New", controllerName: "Products", method: FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+                @Html.Label("Title", "Titlu Produs")
+                <br />
+                @Html.TextBox("Title", null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Title, "", new { @class = "text-danger" })
+                <br />  <br />
+
+                @Html.Label("Description", "Descriere Produs")
+                <br />
+                @Html.TextArea("Description", null, new { @class = "summernote" })
+                @Html.ValidationMessage("Description", null, new { @class = "text-danger" })
+                <br /> <br />
+
+                @Html.Label("Price", "Pret Produs")
+                @Html.TextBox("Price", null, new { @class = "form-control", @type = "number" })
+                @Html.ValidationMessageFor(m => m.Price, null, new { @class = "text-danger" })
+                <br /> <br />
+                
+                @Html.Label("Image", "Incarcati imagine")
+                @Html.TextBox("Image", null, new { @class = "form-control", @type = "file" })
+                @Html.ValidationMessageFor(m => m.Image, null , new { @class = "text-danger" })
+                <br /> <br />
+
+                <label>Selectati categoria</label>
+                @Html.DropDownListFor(m => m.CategoryId, new SelectList(Model.Categ, "Value", "Text"),
+                                      "Selectati categoria", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.CategoryId, null, new { @class = "text-danger" })
+                <br /> <br />
+
+                <button class="btn btn-success" type="submit">Adauga produs</button>
+            }
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+

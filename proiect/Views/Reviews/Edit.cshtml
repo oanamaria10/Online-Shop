@@ -1,0 +1,37 @@
+﻿@model proiect.Models.Review
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Editare comentariu</h2>
+<br />
+
+@using (Html.BeginForm(actionName: "Edit", controllerName: "Reviews", routeValues: new { id = Model.ReviewId }))
+{
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    <label>Continut review</label>
+    <br />
+
+    @Html.Editor("Content", new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessage("Content", null, new
+        {
+            @class = "text-danger"
+        })
+    <br />
+
+    <label>Rating produs</label>
+    <br />
+    <input type="number" readonly id="output" class="form-control" id="rating" name="Rating">
+    <p class="star-rating">
+        <i class="my-star star-1" data-star="1"></i>
+        <i class="my-star star-2" data-star="2"></i>
+        <i class="my-star star-3" data-star="3"></i>
+        <i class="my-star star-4" data-star="4"></i>
+        <i class="my-star star-5" data-star="5"></i>
+    </p>
+    @Html.ValidationMessageFor(m => m.Rating, null, new { @class = "text-danger" })
+    <br />
+
+    <button class="btn  btn-primary" type="submit">Editeaza review-ul</button>
+}
+

@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Afisare categorie";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<br />
+<div class="card-body">
+<h3>@Model.CategoryName</h3>
+    <form method="post" action="/Categories/Delete/@Model.CategoryId">
+        <button class="btn btn-danger" type="submit">Sterge categoria</button>
+    </form>
+    <hr />
+</div>
+
+<br />
+
+<a class="btn alert-success" href="/Categories/Index/" style="color:white">Afisare lista categorii</a>
+
+
+<hr />
+

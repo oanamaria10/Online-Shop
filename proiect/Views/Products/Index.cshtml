@@ -1,0 +1,86 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+
+<br />
+@if (TempData["message"] != null)
+{
+    <div class="alert p-3 rounded-3 text-center mb-5 @ViewBag.Alert">
+        @ViewBag.Message
+    </div>
+}
+
+<br />
+
+@* motor de cautare *@
+<form method="GET">
+    <div class="input-group mb-3">
+
+        <input type="text" class="form-control" placeholder="Cauta produsul dupa denumire" name="search" value="@ViewBag.SearchString">
+
+        <button class="btn btn-outline-success" type="submit" style="color:white">Search</button>
+
+        <select class="form-select" name="sort">
+            <option value="" > Sorteaza dupa: </option>
+            <!option value="priceASC" @(ViewBag.SortString == "priceASC" ? "selected" : "")> Pret Crescator </!option>
+            <!option value="priceDESC" @(ViewBag.SortString == "priceDESC" ? "selected" : "")> Pret Descrescator </!option>
+            <!option value="finalratingASC" @(ViewBag.SortString == "finalratingASC" ? "selected" : "")> Rating Crescator </!option>
+            <!option value="finalratingDESC" @(ViewBag.SortString == "finalratingDESC" ? "selected" : "")> Rating Descrescator </!option>
+        </select>
+    </div>
+   
+</form>
+
+@foreach (proiect.Models.Product product in ViewBag.Products)
+{
+    @if (product.Approved == true)
+    {
+        @* folosim un layout partial *@
+        <div class="card">
+            @Html.Partial("ProductInfo", product)
+            <a class="btn btn-success" href="/Products/Show/@product.ProductId">Afisare produs</a>
+
+        </div>
+
+        <br />
+
+        <br />
+    }
+}
+
+@* Afisarea paginata a produselor *@
+<div>
+
+    <nav aria-label="Page navigation example">
+
+        <ul class="pagination">
+
+            <li class="page-item">
+                <a class="page-link" href="@ViewBag.PaginationBaseUrl=1" aria-label="Previous" style="color:black">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+
+            @for (int i = 1; i <= ViewBag.lastPage; i++)
+            {
+                <li class="page-item">
+                    <a class="page-link"
+                       href="@ViewBag.PaginationBaseUrl=@i" style="color:black">@(i)</a>
+                </li>
+            }
+
+            <li class="page-item">
+                <a class="page-link" href="@ViewBag.PaginationBaseUrl=@(ViewBag.lastPage)" aria-label="Next" style="color:black">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+</div>
+
+
+

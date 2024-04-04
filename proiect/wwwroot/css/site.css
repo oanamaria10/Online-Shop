@@ -1,0 +1,111 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+.card-body {
+    background-color: #F2DCE8;
+}
+
+.note-editable {
+    background-color: white !important;
+}
+
+.alert {
+    background-color: #F2DCE8;
+}
+
+body {
+    margin-bottom: 60px;
+    background-color: #E1B4CD;
+    font-family: Verdana, sans-serif;
+}
+
+.btn {
+    background-color: #892E61 !important;
+    border: none !important;
+}
+.btn:hover {
+    color: #E1B4CD !important;
+}
+    a.btn-outline-success {
+        background-color: #892E61 !important;
+        border: none !important;
+    }
+
+.card-title {
+    background-color: #CD88AF !important;
+    border: none !important;
+}
+
+.navbar {
+    background-color: #CD88AF !important;
+    border: none !important;
+    box-shadow: 0 3px 12px #892E61 !important;
+}
+
+a.nav-link {
+    color: #2c2c2c !important;
+}
+
+    a.nav-link:hover {
+        color: #E1B4CD !important;
+    }
+
+.logoutbtn {
+    color: #2c2c2c !important;
+}
+
+    .logoutbtn:hover {
+        color: #E1B4CD !important;
+    }
+
+.note-editor .dropdown-toggle::after {
+    display: none;
+}
+
+
+    .font-logo:hover {
+        color: #E1B4CD !important;
+    }
+
+.footer-position {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #ffffff;
+    text-align: center;
+    box-shadow: 0 3px 12px #636e72;
+}
+/*set the default color of the stars*/
+.star-rating {
+    color: #bebebe;
+    font-size: 2em;
+}
+/*create the star*/
+.my-star::before {
+    content: "\002605";
+}
+/*remove the default style (italic) of the star*/
+.my-star {
+    font-style: unset !important;
+}
+/*set active star color*/
+.is-active {
+    color: #fb8900;
+}
+/*set color on hover*/
+.my-star:not(.is-active):hover {
+    color: #fb8900;
+}

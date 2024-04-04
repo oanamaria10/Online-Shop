@@ -1,0 +1,40 @@
+﻿﻿
+@{
+    ViewBag.Title = "Cos";
+}
+<div class="card-body">
+
+    @foreach (var product in ViewBag.Products)
+    {
+        if (product.Approved)
+        {
+            <div class="card mb-5">
+                <div class="row">
+                    <div class="col-lg-5">
+                        <a href="/Products/Show/@product.ProductId">
+                            <div class="card-text">
+                                <img class="img-fluid img-thumbnail mb-2" width="300" height="400" src="@product.Image">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="card">
+                            <div class="pb-5">
+                                <h1>@product.Title</h1>
+                                <br />
+                                <p>Pret: @product.Price lei</p>
+                                <br />
+                                <form method="post" action="/Basket/Remove/@product.ProductId">
+                                    <button class="btn btn-danger" type="submit">Sterge produs</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    <p class="card-title alert-success py-3 px-3 rounded-2" style="color:white">Pret total: <span>@ViewBag.TotalPrice lei</span></p>
+    <div class="text-center"><a class="btn btn-danger" href="/Basket/Empty"><i class="bi bi-trash"></i> Goleste cos</a></div>
+</div>
+<br />

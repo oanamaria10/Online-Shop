@@ -1,0 +1,164 @@
+﻿@model proiect.Models.Product
+
+@* Afisarea unui produs impreuna cu categoria din care face *@
+
+<br />
+@if (TempData["message"] != null)
+{
+    <div class="alert p-3 rounded-3 text-center mb-5 @ViewBag.Alert">
+        @ViewBag.Message
+    </div>
+}
+
+<br />
+<div class="card">
+
+    @* layout partial *@
+    @Html.Partial("ProductInfo", Model)
+
+    @if (ViewBag.AfisareButoane == true && Model.UserId == ViewBag.UserCurent || ViewBag.EsteAdmin)
+    {
+        <div class="d-flex flex-row justify-content-between p-3 border-1 border-top">
+
+            <a class="btn btn-success" href="/Products/Edit/@Model.ProductId">Editeaza produs</a>
+
+            <form method="post" action="/Products/Delete/@Model.ProductId">
+
+                <button class="btn btn-danger" type="submit">Sterge produs</button>
+
+            </form>
+
+        </div>
+    }
+
+</div>
+
+<br />
+<br />
+
+@* Afisare comentarii impreuna cu butoanele de editare si stergere *@
+@foreach (var rev in Model.Reviews)
+{
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-2"></div>
+
+            <div class="col-md-8">
+
+                <div>
+                    <div class="card-body">
+                    <p>@rev.Content</p>
+                    <p>Rating produs: @rev.Rating</p>
+                    @for (int i = 1; i <= 5; i++)
+                    {
+                        if (i <= @rev.Rating)
+                        {
+                                <i class="my-star star-@i is-active"></i>
+                        }
+                        else
+                        {
+                                <i class="my-star"></i>
+                        }
+                    }
+                    <small>@rev.Date</small>
+                    <strong><i class="bi bi-person"></i>@rev.User.UserName</strong>
+                     
+             
+
+                <br>
+
+                <div class="d-flex">
+
+                    @if (rev.UserId == ViewBag.UserCurent)
+                    {
+                        <div>
+
+                            <a class="btn btn-outline" href="/Reviews/Edit/@rev.ReviewId"><i class="bi bi-pencil-square"></i>Editeaza</a>
+
+                        </div>
+                    }
+
+                    @if (rev.UserId == ViewBag.UserCurent || ViewBag.EsteAdmin)
+                    {
+                        <div>
+
+                            <form method="post" action="/Reviews/Delete/@rev.ReviewId">
+
+                                <button class="btn btn-outline-danger" type="submit"><i class="bi bi-trash"></i>Sterge</button>
+
+                            </form>
+
+                        </div>
+                    }
+
+                </div>
+                    </div>
+                </div>
+                <br />
+
+            </div>
+
+            <div class="col-md-2"></div>
+
+        </div>
+
+    </div>
+}
+
+
+@* Afisarea formularului in care se poate adauga un comentariu *@
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-2"></div>
+
+        <div class="col-md-8">
+
+            <div class="card">
+
+                <form method="post" action="/Products/Show/@Model.ProductId">
+
+                    @if (User.Identity.IsAuthenticated == true)
+                    {
+                        <div class="card-body">
+
+                            <input type="hidden" name="ProductId" value="@Model.ProductId" />
+
+                            <label>Continut review</label>
+                            <br />
+
+                            <textarea class="form-control" name="Content"></textarea>
+
+                            @Html.ValidationMessage("Content", null, new { @class = "text-danger"})
+
+                            <br /><label for="rating">Rating produs (intre 1 si 5):</label>
+                            <br />
+                            <input type="number" readonly id="output" class="form-control" id="rating" name="Rating">
+                            <p class="star-rating">
+                                <i class="my-star star-1" data-star="1"></i>
+                                <i class="my-star star-2" data-star="2"></i>
+                                <i class="my-star star-3" data-star="3"></i>
+                                <i class="my-star star-4" data-star="4"></i>
+                                <i class="my-star star-5" data-star="5"></i>
+                            </p>
+                            <br /><br />
+                            <button class="btn btn-success " type="submit">Adauga</button>
+
+                        </div>
+                    }
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-2"></div>
+
+    </div>
+
+</div>
