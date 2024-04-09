@@ -1,5 +1,5 @@
 # **Short Description**
-Online Shop Web Application using APS.NET Core Framework.
+Online Shop Web Application using ASP.NET Core Framework.
 
 # **Features**
 
