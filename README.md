@@ -20,6 +20,6 @@ Online Shop Web Application using APS.NET Core Framework.
 
 - .NET Core MVC framework
 - Entity Framework
-- HTML/CSS for FrontEnd
+- HTML/CSS/JavaScript 
 - C# language
 
